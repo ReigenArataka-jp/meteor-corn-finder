@@ -11,7 +11,7 @@ public class ServerSeekerScreen extends WindowScreen {
     private final MultiplayerScreen multiplayerScreen;
 
     public ServerSeekerScreen(MultiplayerScreen multiplayerScreen) {
-        super(GuiThemes.get(), "ServerSeeker (CornFinder)");
+        super(GuiThemes.get(), "CornFinder");
         this.multiplayerScreen = multiplayerScreen;
     }
 

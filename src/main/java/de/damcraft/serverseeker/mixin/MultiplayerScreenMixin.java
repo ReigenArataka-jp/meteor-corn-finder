@@ -29,10 +29,10 @@ public abstract class MultiplayerScreenMixin extends Screen {
 
     @Inject(method = "init", at = @At(value = "INVOKE", target = "Lnet/minecraft/client/gui/screen/multiplayer/MultiplayerScreen;updateButtonActivationStates()V"))
     private void onInit(CallbackInfo info) {
-        // Add a button which sets the current screen to the ServerSeekerScreen
+        // Add a button which opens the CornFinder screen
         this.addDrawableChild(
             new ButtonWidget.Builder(
-                Text.literal("ServerSeeker"),
+                Text.literal("CornFinder"),
                 onPress -> {
                     if (this.client == null) return;
                     this.client.setScreen(new ServerSeekerScreen((MultiplayerScreen) (Object) this));

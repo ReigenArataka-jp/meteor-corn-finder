@@ -1,5 +1,9 @@
 # meteor corn finder
 
+<a href="https://github.com/ReigenArataka-jp/meteor-corn-finder/releases/latest">
+    <img src="https://img.shields.io/badge/-DOWNLOAD%20LATEST-2b2b2b?style=for-the-badge&logo=download&logoColor=white" width=100% >
+</a>
+
 serverseeker revived, finds fresh and tasty corn for your ducks, uses cornbread2100's mass scan api
 
 ## what
@@ -19,14 +23,13 @@ no api key needed - just install and search
 ## install
 
 1. install [meteor client](https://meteorclient.com/)
-2. download the latest `.jar` from [releases](https://github.com/ReigenArataka-jp/meteor-corn-finder/releases)
-3. drop it in your `mods` folder
+2. click the big download button above and drop the jar in your `mods` folder
 
 ## use
 
 ### server search
 1. open the multiplayer screen
-2. click `serverseeker`
+2. click `cornfinder`
 3. click `find new servers`
 4. tweak filters (version, cracked, country, player count, whitelist, favicon)
 5. click `find`
@@ -53,5 +56,6 @@ powered by [cornbread2100's api](https://api.cornbread2100.com/)
 
 ## credits
 
+- by [ReigenArataka-jp](https://github.com/ReigenArataka-jp)
 - original [meteorserverseeker](https://github.com/RacoonDog/MeteorServerSeeker) by racoondog
 - mass scan data by cornbread2100

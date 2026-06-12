@@ -63,12 +63,12 @@ public class ServerSeeker extends MeteorAddon {
 
     @Override
     public GithubRepo getRepo() {
-        return new GithubRepo("RacoonDog", "MeteorServerSeeker");
+        return new GithubRepo("ReigenArataka-jp", "meteor-corn-finder");
     }
 
     @Override
     public String getWebsite() {
-        return "https://api.cornbread2100.com/";
+        return "https://github.com/ReigenArataka-jp/meteor-corn-finder/";
     }
 
     @Override

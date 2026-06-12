@@ -5,13 +5,12 @@
   "name": "Meteor Corn Finder",
   "description": "serverseeker revived, finds fresh and tasty corn for your ducks, uses cornbread2100's mass scan api",
   "authors": [
-    "RacoonDog"
+    "ReigenArataka-jp"
   ],
   "contact": {
-    "repo": "https://github.com/RacoonDog/MeteorServerSeeker/",
-    "discord": "https://discord.gg/serverseeker-1087081486747971705",
-    "issues": "https://github.com/RacoonDog/MeteorServerSeeker/issues",
-    "sources": "https://github.com/RacoonDog/MeteorServerSeeker/"
+    "repo": "https://github.com/ReigenArataka-jp/meteor-corn-finder/",
+    "issues": "https://github.com/ReigenArataka-jp/meteor-corn-finder/issues",
+    "sources": "https://github.com/ReigenArataka-jp/meteor-corn-finder/"
   },
   "icon": "assets/serverseeker/icon.png",
   "environment": "client",
@@ -26,12 +25,7 @@
   ],
   "custom": {
     "meteor-client:color": "245,197,66",
-    "meteor-client:commit": "${commit}",
-    "modmenu": {
-      "links": {
-        "modmenu.discord": "https://discord.gg/serverseeker-1087081486747971705"
-      }
-    }
+    "meteor-client:commit": "${commit}"
   },
   "depends": {
     "java": ">=21",
