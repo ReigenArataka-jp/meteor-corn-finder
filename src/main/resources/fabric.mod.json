@@ -1,0 +1,43 @@
+{
+  "schemaVersion": 1,
+  "id": "serverseeker",
+  "version": "${version}",
+  "name": "Meteor Corn Finder",
+  "description": "serverseeker revived, finds fresh and tasty corn for your ducks, uses cornbread2100's mass scan api",
+  "authors": [
+    "RacoonDog"
+  ],
+  "contact": {
+    "repo": "https://github.com/RacoonDog/MeteorServerSeeker/",
+    "discord": "https://discord.gg/serverseeker-1087081486747971705",
+    "issues": "https://github.com/RacoonDog/MeteorServerSeeker/issues",
+    "sources": "https://github.com/RacoonDog/MeteorServerSeeker/"
+  },
+  "icon": "assets/serverseeker/icon.png",
+  "environment": "client",
+  "license": "MPL-2.0",
+  "entrypoints": {
+    "meteor": [
+      "de.damcraft.serverseeker.ServerSeeker"
+    ]
+  },
+  "mixins": [
+    "serverseeker.mixins.json"
+  ],
+  "custom": {
+    "meteor-client:color": "245,197,66",
+    "meteor-client:commit": "${commit}",
+    "modmenu": {
+      "links": {
+        "modmenu.discord": "https://discord.gg/serverseeker-1087081486747971705"
+      }
+    }
+  },
+  "depends": {
+    "java": ">=21",
+    "minecraft": ">=1.21"
+  },
+  "recommends": {
+    "meteor-client": "*"
+  }
+}
