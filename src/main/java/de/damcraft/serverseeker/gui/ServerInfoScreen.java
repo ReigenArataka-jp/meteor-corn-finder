@@ -36,23 +36,25 @@ public class ServerInfoScreen extends WindowScreen {
     @Override
     public void initWidgets() {
         String ipStr = intToIp(server.ip) + ":" + server.port;
-        HostAndPort hap = HostAndPort.fromString(ipStr);
+        final HostAndPort hap = HostAndPort.fromString(ipStr);
 
-        String versionStr = server.version != null ? server.version.name + " (protocol " + server.version.protocol + ")" : "Unknown";
-        String playersStr = server.players != null ? server.players.online + "/" + server.players.max : "?/?";
-        String description = server.description != null ? server.description : "";
-        if (description.length() > 100) description = description.substring(0, 100) + "...";
+        final String versionStr = server.version != null ? server.version.name + " (protocol " + server.version.protocol + ")" : "Unknown";
+        final String playersStr = server.players != null ? server.players.online + "/" + server.players.max : "?/?";
+        String desc = server.description != null ? server.description : "";
+        if (desc.length() > 100) desc = desc.substring(0, 100) + "...";
+        final String description = desc;
 
-        String lastSeenStr = "Unknown";
+        String seen = "Unknown";
         if (server.lastSeen != null) {
             try {
                 long epoch = Long.parseLong(server.lastSeen);
-                lastSeenStr = DateTimeFormatter.ofLocalizedDateTime(FormatStyle.SHORT)
+                seen = DateTimeFormatter.ofLocalizedDateTime(FormatStyle.SHORT)
                     .format(Instant.ofEpochSecond(epoch).atZone(ZoneId.systemDefault()).toLocalDateTime());
             } catch (NumberFormatException ignored) {}
         }
+        final String lastSeenStr = seen;
 
-        String crackedStr = server.cracked == null ? "Unknown" : server.cracked.toString();
+        final String crackedStr = server.cracked == null ? "Unknown" : server.cracked.toString();
 
         WTable dataTable = add(theme.table()).widget();
 
@@ -114,8 +116,6 @@ public class ServerInfoScreen extends WindowScreen {
             String raw = get(url);
 
             this.client.execute(() -> {
-                // Remove the last 2 widgets (label + loading label), but leave join button
-                // We can't easily remove widgets, so we just re-init
                 clear();
                 initWidgetsStatic(hap, ipStr, versionStr, playersStr, description, lastSeenStr, crackedStr, raw);
             });
