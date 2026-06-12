@@ -1,0 +1,11 @@
+{
+  "description": "revived serverseeker using cornbread2100 mass scan api - find servers, players, and view player history",
+  "tags": ["Utility", "Misc", "Exploit"],
+  "supported_versions": ["1.21.1", "1.21.4"],
+  "homepage": "https://github.com/ReigenArataka-jp/meteor-corn-finder",
+  "feature_directories": {
+    "commands": ["commands"],
+    "modules": ["modules"],
+    "hud_elements": ["hud"]
+  }
+}
