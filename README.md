@@ -4,24 +4,48 @@ serverseeker revived, finds fresh and tasty corn for your ducks, uses cornbread2
 
 ## what
 
-a meteor client addon that lets you find minecraft servers using the cornbread2100 mass scan api
+a meteor client addon that lets you find minecraft servers and player histories using the cornbread2100 mass scan api
 
 no api key needed - just install and search
+
+## features
+
+- search servers by version, cracked, country, player count, whitelist, favicon, description
+- search for players across all servers (online or history)
+- view player history for any server
+- auto-updating player hud when you join servers
+- bungeespoof module for joining bungeecord backends
 
 ## install
 
 1. install [meteor client](https://meteorclient.com/)
-2. download the latest `.jar` from [releases](https://github.com/RacoonDog/MeteorServerSeeker/releases)
+2. download the latest `.jar` from [releases](https://github.com/ReigenArataka-jp/meteor-corn-finder/releases)
 3. drop it in your `mods` folder
 
 ## use
 
+### server search
 1. open the multiplayer screen
 2. click `serverseeker`
 3. click `find new servers`
-4. tweak filters (version, cracked, country, player count)
+4. tweak filters (version, cracked, country, player count, whitelist, favicon)
 5. click `find`
 6. add servers to your list and join
+
+### player search
+1. click `search players`
+2. enter a player name
+3. choose `currently online` or `player history`
+4. click `find player`
+5. see all servers where that player was seen
+
+### player history
+1. select a server in your multiplayer list
+2. click `get players`
+3. see all players that were seen on that server with crack login buttons
+
+### server info command
+- use `.serverInfo` while connected to a server to see its player history
 
 ## api
 

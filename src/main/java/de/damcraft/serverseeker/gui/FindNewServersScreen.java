@@ -50,6 +50,20 @@ public class FindNewServersScreen extends WindowScreen {
         }
     }
 
+    public enum BoolFilter {
+        Any,
+        Yes,
+        No;
+
+        public Boolean toBoolOrNull() {
+            return switch (this) {
+                case Any -> null;
+                case Yes -> true;
+                case No -> false;
+            };
+        }
+    }
+
     public enum Version {
         Current,
         Any,
@@ -164,7 +178,7 @@ public class FindNewServersScreen extends WindowScreen {
 
     private final Setting<String> versionStringSetting = sg.add(new StringSetting.Builder()
         .name("version-string")
-        .description("The version string (e.g. 1.21.4) of the protocol version the server should have. Must be at least 1.7.1")
+        .description("The version string (e.g. 1.21.1) of the protocol version the server should have. Must be at least 1.7.1")
         .defaultValue("1.21.1")
         .visible(() -> versionSetting.get() == Version.VersionString)
         .build()
@@ -177,6 +191,20 @@ public class FindNewServersScreen extends WindowScreen {
         .min(1)
         .max(100)
         .noSlider()
+        .build()
+    );
+
+    private final Setting<BoolFilter> whitelistedSetting = sg.add(new EnumSetting.Builder<BoolFilter>()
+        .name("whitelisted")
+        .description("Whether the server should be whitelisted")
+        .defaultValue(BoolFilter.Any)
+        .build()
+    );
+
+    private final Setting<BoolFilter> hasFaviconSetting = sg.add(new EnumSetting.Builder<BoolFilter>()
+        .name("has-favicon")
+        .description("Whether the server should have a favicon")
+        .defaultValue(BoolFilter.Any)
         .build()
     );
 
@@ -213,10 +241,23 @@ public class FindNewServersScreen extends WindowScreen {
         findButton.action = () -> {
             ServersRequest request = new ServersRequest();
             request.setLimit(serverLimitSetting.get());
-
             request.setCracked(crackedSetting.get().toBoolOrNull());
+            request.setWhitelisted(whitelistedSetting.get().toBoolOrNull());
+            request.setHasFavicon(hasFaviconSetting.get().toBoolOrNull());
+
             if (!descriptionSetting.get().isEmpty()) {
                 request.setDescription(descriptionSetting.get());
+            }
+
+            // Player count filters - use API params
+            switch (onlinePlayersNumTypeSetting.get()) {
+                case Equals -> request.setPlayerCount(equalsOnlinePlayersSetting.get());
+                case AtLeast -> request.setMinPlayers(atLeastOnlinePlayersSetting.get());
+                case AtMost -> request.setMaxPlayers(atMostOnlinePlayersSetting.get());
+                case Between -> {
+                    request.setMinPlayers(atLeastOnlinePlayersSetting.get());
+                    request.setMaxPlayers(atMostOnlinePlayersSetting.get());
+                }
             }
 
             switch (versionSetting.get()) {
@@ -268,20 +309,6 @@ public class FindNewServersScreen extends WindowScreen {
                     return;
                 }
 
-                // Filter by online player count locally (API doesn't support player count filters)
-                if (onlinePlayersNumTypeSetting.get() != NumRangeType.Any && response.data != null) {
-                    response.data = response.data.stream().filter(s -> {
-                        int online = s.players != null ? s.players.online : 0;
-                        return switch (onlinePlayersNumTypeSetting.get()) {
-                            case Equals -> online == equalsOnlinePlayersSetting.get();
-                            case AtLeast -> online >= atLeastOnlinePlayersSetting.get();
-                            case AtMost -> online <= atMostOnlinePlayersSetting.get();
-                            case Between -> online >= atLeastOnlinePlayersSetting.get() && online <= atMostOnlinePlayersSetting.get();
-                            default -> true;
-                        };
-                    }).toList();
-                }
-
                 this.threadServers = response.data;
                 this.threadHasFinished = true;
             });
@@ -330,7 +357,6 @@ public class FindNewServersScreen extends WindowScreen {
             add(theme.label(this.threadError)).expandX();
             WButton backButton = add(theme.button("Back")).expandX().widget();
             backButton.action = this::reload;
-            this.locked = false;
             return;
         }
         clear();
@@ -340,7 +366,6 @@ public class FindNewServersScreen extends WindowScreen {
             add(theme.label("No servers found")).expandX();
             WButton backButton = add(theme.button("Back")).expandX().widget();
             backButton.action = this::reload;
-            this.locked = false;
             return;
         }
         add(theme.label("Found " + servers.size() + " servers")).expandX();
